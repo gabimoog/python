@@ -633,7 +633,7 @@ macro_pops (xplasma, xne)
             Error ("macro_pops: ion %i has frac. pop. %8.4e in cell %i\n", index_ion, xplasma->density[index_ion], xplasma->nplasma);
             insane = 1;
           }
-          else 
+          else
           {
             xplasma->density[index_ion] = ionden_temp;
           }

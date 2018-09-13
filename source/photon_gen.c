@@ -112,7 +112,7 @@ define_phot (p, f1, f2, nphot_tot, ioniz_or_final, iwind, freq_sampling)
                                    bands.  This is used for the for ionization calculation where one wants to assure
                                    that you have "enough" photons at high energy */
 
-    ftot = populate_bands(ioniz_or_final, iwind, &xband);
+    ftot = populate_bands (ioniz_or_final, iwind, &xband);
 
     for (n = 0; n < NPHOT; n++)
       p[n].path = -1.0;         /* SWM - Zero photon paths */
@@ -128,7 +128,7 @@ define_phot (p, f1, f2, nphot_tot, ioniz_or_final, iwind, freq_sampling)
         /* Reinitialization is required here always because we are changing
          * the frequencies around all the time */
 
-        Log("Defining photons for band %d...\n", n);
+        Log ("Defining photons for band %d...\n", n);
 
         xdefine_phot (xband.f1[n], xband.f2[n], ioniz_or_final, iwind, PRINT_ON);
 
@@ -187,7 +187,7 @@ define_phot (p, f1, f2, nphot_tot, ioniz_or_final, iwind, freq_sampling)
  **********************************************************/
 
 double
-populate_bands(ioniz_or_final, iwind, band)
+populate_bands (ioniz_or_final, iwind, band)
      int ioniz_or_final;
      int iwind;
      struct xbands *band;
@@ -363,9 +363,9 @@ iwind = -1 	Don't generate any wind photons at all
 
 
   geo.f_tot = geo.f_star + geo.f_disk + geo.f_bl + geo.f_wind + geo.f_kpkt + geo.f_matom + geo.f_agn;
-  geo.lum_tot = geo.lum_star+ geo.lum_disk+ geo.lum_bl+ geo.lum_agn+ geo.lum_wind;
-  
-  if (print_mode == PRINT_ON) 
+  geo.lum_tot = geo.lum_star + geo.lum_disk + geo.lum_bl + geo.lum_agn + geo.lum_wind;
+
+  if (print_mode == PRINT_ON)
   {
     Log
       ("!! xdefine_phot: lum_tot %8.2e lum_star %8.2e lum_disk %8.2e lum_bl %8.2e lum_agn %8.2e lum_wind %8.2e\n",
@@ -376,14 +376,14 @@ iwind = -1 	Don't generate any wind photons at all
        geo.f_tot, geo.f_star, geo.f_disk, geo.f_bl, geo.f_agn, geo.f_wind, geo.f_matom, geo.f_kpkt);
 
     Log
-      ("!! xdefine_phot: wind ff %8.2e       fb %8.2e   lines  %8.2e  for freq %8.2e %8.2e\n", 
-        geo.lum_ff, geo.lum_rr, geo.lum_lines, f1, f2);
+      ("!! xdefine_phot: wind ff %8.2e       fb %8.2e   lines  %8.2e  for freq %8.2e %8.2e\n",
+       geo.lum_ff, geo.lum_rr, geo.lum_lines, f1, f2);
     Log
-      ("!! xdefine_phot: star  tstar  %8.2e   %8.2e   lum_star %8.2e %8.2e  %8.2e \n", 
-        geo.tstar, geo.tstar_init, geo.lum_star, geo.lum_star_init, geo.lum_star_back);
+      ("!! xdefine_phot: star  tstar  %8.2e   %8.2e   lum_star %8.2e %8.2e  %8.2e \n",
+       geo.tstar, geo.tstar_init, geo.lum_star, geo.lum_star_init, geo.lum_star_back);
     Log
-      ("!! xdefine_phot: disk                               lum_disk %8.2e %8.2e  %8.2e \n", 
-        geo.lum_disk, geo.lum_disk_init, geo.lum_disk_back);
+      ("!! xdefine_phot: disk                               lum_disk %8.2e %8.2e  %8.2e \n",
+       geo.lum_disk, geo.lum_disk_init, geo.lum_disk_back);
   }
 
 
@@ -657,19 +657,20 @@ star_init (freqmin, freqmax, ioniz_or_final, f)
      double freqmin, freqmax, *f;
      int ioniz_or_final;
 {
-  double r,tstar, log_g;
+  double r, tstar, log_g;
   double emit, emittance_bb (), emittance_continuum ();
   int spectype;
 
   log_g = geo.gstar = log10 (G * geo.mstar / (geo.rstar * geo.rstar));
-  r=geo.rstar;
+  r = geo.rstar;
 
-  tstar=geo.tstar=geo.tstar_init;
-  geo.lum_star=geo.lum_star_init;
+  tstar = geo.tstar = geo.tstar_init;
+  geo.lum_star = geo.lum_star_init;
 
-  if (geo.absorb_reflect==BACK_RAD_ABSORB_AND_HEAT && geo.lum_star_back > 0){
-      geo.lum_star=geo.lum_star+geo.lum_star_back;
-      tstar=geo.tstar=pow(geo.lum_star/(4 * PI * STEFAN_BOLTZMANN * r * r),0.25);
+  if (geo.absorb_reflect == BACK_RAD_ABSORB_AND_HEAT && geo.lum_star_back > 0)
+  {
+    geo.lum_star = geo.lum_star + geo.lum_star_back;
+    tstar = geo.tstar = pow (geo.lum_star / (4 * PI * STEFAN_BOLTZMANN * r * r), 0.25);
   }
 
 
@@ -691,7 +692,7 @@ star_init (freqmin, freqmax, ioniz_or_final, f)
   *f *= (4. * PI * r * r);
 
 
-  return(0);
+  return (0);
 
 }
 
@@ -767,7 +768,7 @@ photo_gen_star (p, r, t, weight, f1, f2, spectype, istart, nphot)
     else if (spectype == SPECTYPE_UNIFORM)
     {                           /* Kurucz spectrum */
       /*Produce a uniform distribution of frequencies */
-      p[i].freq = random_number(freqmin,freqmax); //Generate a random frequency - this will exclude freqmin,freqmax.
+      p[i].freq = random_number (freqmin, freqmax);     //Generate a random frequency - this will exclude freqmin,freqmax.
 
     }
     else
@@ -854,10 +855,10 @@ disk_init (rmin, rmax, m, mdot, freqmin, freqmax, ioniz_or_final, ftot)
   double t, tref, teff (), tdisk ();
   double log_g, gref, geff (), gdisk ();
   double dr, r;
-  double logdr,logrmin,logrmax,logr;
+  double logdr, logrmin, logrmax, logr;
   double f, ltot;
   double q1;
-  int nrings,i,icheck;
+  int nrings, i, icheck;
   int spectype;
   double emit, emittance_bb (), emittance_continuum ();
 
@@ -873,16 +874,16 @@ disk_init (rmin, rmax, m, mdot, freqmin, freqmax, ioniz_or_final, ftot)
      It can change if photons hitting the disk are allowed to raise the temperature
    */
 
-  logrmax=log(rmax);
-  logrmin=log(rmin);
-  logdr=(logrmax-logrmin)/STEPS;
+  logrmax = log (rmax);
+  logrmin = log (rmin);
+  logdr = (logrmax - logrmin) / STEPS;
 
-  for (nrings = 0; nrings < NRINGS; nrings++) //Initialise the structure
+  for (nrings = 0; nrings < NRINGS; nrings++)   //Initialise the structure
   {
     disk.nphot[nrings] = 0;
     disk.nphot[nrings] = 0;
-	disk.r[nrings] = 0;
-	disk.t[nrings] = 0;
+    disk.r[nrings] = 0;
+    disk.t[nrings] = 0;
     disk.nhit[nrings] = 0;
     disk.heat[nrings] = 0;
     disk.ave_freq[nrings] = 0;
@@ -895,14 +896,14 @@ disk_init (rmin, rmax, m, mdot, freqmin, freqmax, ioniz_or_final, ftot)
 
   ltot = 0;
 
- for (logr=logrmin;logr<logrmax;logr+=logdr)
- {
-    r=exp(logr);
-    dr=exp(logr+logdr)-r;
+  for (logr = logrmin; logr < logrmax; logr += logdr)
+  {
+    r = exp (logr);
+    dr = exp (logr + logdr) - r;
     t = teff (tref, (r + 0.5 * dr) / rmin);
-    ltot += t * t * t * t * (2. * r + dr) *dr;
+    ltot += t * t * t * t * (2. * r + dr) * dr;
   }
-  geo.lum_disk_init=ltot *= 2. * STEFAN_BOLTZMANN * PI;
+  geo.lum_disk_init = ltot *= 2. * STEFAN_BOLTZMANN * PI;
 
 
   /* Now establish the type of spectrum to create */
@@ -921,13 +922,13 @@ disk_init (rmin, rmax, m, mdot, freqmin, freqmax, ioniz_or_final, ftot)
   q1 = 2. * PI;
 
   (*ftot) = 0;
-  icheck=0;
+  icheck = 0;
 
 
-  for (logr=logrmin;logr<logrmax;logr+=logdr)
+  for (logr = logrmin; logr < logrmax; logr += logdr)
   {
-    r=exp(logr);
-    dr=exp(logr+logdr)-r;
+    r = exp (logr);
+    dr = exp (logr + logdr) - r;
     t = teff (tref, (r + 0.5 * dr) / rmin);
     log_g = log10 (geff (gref, (r + 0.5 * dr) / rmin));
 
@@ -964,11 +965,11 @@ disk_init (rmin, rmax, m, mdot, freqmin, freqmax, ioniz_or_final, ftot)
   nrings = 1;
   f = 0;
 
-  i=0;
-  for (logr=logrmin;logr<logrmax;logr+=logdr)
+  i = 0;
+  for (logr = logrmin; logr < logrmax; logr += logdr)
   {
-    r=exp(logr);
-    dr=exp(logr+logdr)-r;
+    r = exp (logr);
+    dr = exp (logr + logdr) - r;
     t = teff (tref, (r + 0.5 * dr) / rmin);
     log_g = log10 (geff (gref, (r + 0.5 * dr) / rmin));
 
@@ -982,11 +983,11 @@ disk_init (rmin, rmax, m, mdot, freqmin, freqmax, ioniz_or_final, ftot)
     }
 
     f += q1 * emit * (2. * r + dr) * dr;
-	i++;
+    i++;
     /* EPSILON to assure that roundoffs don't affect result of if statement */
     if (f / (*ftot) * (NRINGS - 1) >= nrings)
     {
-      if (r <= disk.r[nrings - 1])  //If the radius we have reached is smaller than or equal to the last assigned radius - we make a tiny annulus
+      if (r <= disk.r[nrings - 1])      //If the radius we have reached is smaller than or equal to the last assigned radius - we make a tiny annulus
       {
         r = disk.r[nrings - 1] * (1. + 1.e-10);
       }
@@ -995,7 +996,7 @@ disk_init (rmin, rmax, m, mdot, freqmin, freqmax, ioniz_or_final, ftot)
       nrings++;
       if (nrings >= NRINGS)
       {
-//        Error_silent ("disk_init: Got to ftot %e at r %e < rmax %e. OK if freqs are high\n", f, r, rmax);		Not *really* an error, the error below deals with a *real* problem.
+//        Error_silent ("disk_init: Got to ftot %e at r %e < rmax %e. OK if freqs are high\n", f, r, rmax);             Not *really* an error, the error below deals with a *real* problem.
         break;
       }
     }
@@ -1007,7 +1008,7 @@ disk_init (rmin, rmax, m, mdot, freqmin, freqmax, ioniz_or_final, ftot)
   }
 
 
-  disk.r[NRINGS - 1] = exp(logrmax);
+  disk.r[NRINGS - 1] = exp (logrmax);
   disk.v[NRINGS - 1] = sqrt (G * geo.mstar / disk.r[NRINGS - 1]);
 
 
@@ -1103,7 +1104,7 @@ photo_gen_disk (p, weight, f1, f2, spectype, istart, nphot)
  * generate photon.  04march -- ksl
  */
 
-    nring = random_number(0.0,1.0) * (NRINGS - 1);
+    nring = random_number (0.0, 1.0) * (NRINGS - 1);
 
 
     if ((nring < 0) || (nring > NRINGS - 2))
@@ -1118,12 +1119,12 @@ photo_gen_disk (p, weight, f1, f2, spectype, istart, nphot)
  * should account for the area.  But haven't fixed this yet ?? 04Dec
  */
 
-    r = disk.r[nring] + (disk.r[nring + 1] - disk.r[nring]) * random_number(0.0,1.0);
+    r = disk.r[nring] + (disk.r[nring + 1] - disk.r[nring]) * random_number (0.0, 1.0);
 
     /* Generate a photon in the plane of the disk a distance r */
 
 
-    phi = 2. * PI * random_number(0.0,1.0);
+    phi = 2. * PI * random_number (0.0, 1.0);
 
     p[i].x[0] = r * cos (phi);
     p[i].x[1] = r * sin (phi);
@@ -1152,7 +1153,7 @@ photo_gen_disk (p, weight, f1, f2, spectype, istart, nphot)
 
     }
 
-    if (random_number(-0.5,0.5) > 0.0) //Get a uniform random number brtween -0.5 and 0.5- use sign to toss a coin.
+    if (random_number (-0.5, 0.5) > 0.0)        //Get a uniform random number brtween -0.5 and 0.5- use sign to toss a coin.
     {                           /* Then the photon emerges in the upper hemisphere */
       p[i].x[2] = (z + EPSILON);
     }
@@ -1175,7 +1176,7 @@ photo_gen_disk (p, weight, f1, f2, spectype, istart, nphot)
     else if (spectype == SPECTYPE_UNIFORM)
     {                           //Produce a uniform distribution of frequencies
 
-      p[i].freq = random_number(freqmin,freqmax); //Get a random frequency between fmin and fmax (exluding the ends)
+      p[i].freq = random_number (freqmin, freqmax);     //Get a random frequency between fmin and fmax (exluding the ends)
     }
 
     else

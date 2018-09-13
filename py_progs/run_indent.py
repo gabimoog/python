@@ -42,6 +42,35 @@ from glob import glob
 import subprocess
 from shutil import copyfile
 
+def get_gnu():
+
+    # Find gnuindent, if possible
+
+    gnu=False
+    indent=''
+
+    proc = subprocess.Popen('indent -version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout,stderr=proc.communicate()
+    stdout = stdout.decode().split('\n')
+    if stdout[0].count('GNU'):
+        gnu=True
+        indent='indent'
+
+
+    proc = subprocess.Popen('gnuindent -version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout,stderr=proc.communicate()
+    stdout = stdout.decode().split('\n')
+    if stdout[0].count('GNU'):
+        gnu=True
+        indent='gnuindent'
+
+    if gnu==False:
+        print('Error: could not find a gnu version of indent')
+        indent =''
+
+    return indent
+
+
 
 
 
@@ -71,29 +100,8 @@ def doit(filename='lines.c'):
 
 
     '''
-
-    # Find gnuindent, if possible
-
-    gnu=False
-    indent=''
-
-    proc = subprocess.Popen('indent -version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout,stderr=proc.communicate()
-    stdout = stdout.decode().split('\n')
-    if stdout[0].count('GNU'):
-        gnu=True
-        indent='indent'
-
-
-    proc = subprocess.Popen('gnuindent -version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout,stderr=proc.communicate()
-    stdout = stdout.decode().split('\n')
-    if stdout[0].count('GNU'):
-        gnu=True
-        indent='gnuindent'
-
-    if gnu==False:
-        print('Error: could not find a gnu version of indent')
+    indent=get_gnu()
+    if indent=='':
         return
 
     indent_command='%s -gnu -l140 -bli0 -nut -o foo.txt %s' % (indent,filename)
@@ -120,8 +128,8 @@ def doit(filename='lines.c'):
     if len(stdout)>1:
         print('There were differnces after indent for file %s' % filename)
         copyfile('foo.txt',filename)
-    else:
-        print('Indent made no changes for file %s' % filename)
+    # else:
+    #     print('Indent made no changes for file %s' % filename)
 
     return
 
@@ -131,6 +139,8 @@ def do_all():
     '''
     Indent all of the .c and .h files in a directory in a standard way
     '''
+    if get_gnu()=='':
+        return
 
     files=glob('*.h')+glob('*.c')
 
@@ -147,6 +157,10 @@ def steer(argv):
     '''
     Process the command line
     '''
+
+
+    if get_gnu()=='':
+        return
 
     files=[]
     i=1

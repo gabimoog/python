@@ -286,7 +286,7 @@ get_matom_f (mode)
                 ppp.w = 0;
                 /* this needs to be initialised because we set to istat to P_ADIABATIC
                    for adiabatic destruction */
-                ppp.istat = P_INWIND; 
+                ppp.istat = P_INWIND;
 
                 macro_gov (&ppp, &nres, 1, &which_out);
 
@@ -512,7 +512,7 @@ photo_gen_kpkt (p, weight, photstart, nphot)
     /* locate the wind_cell in which the photon bundle originates. */
 
 //    xlum = (rand () + 0.5) / (MAXRAND) * geo.f_kpkt; DONE
-    xlum = random_number(0.0,1.0) * geo.f_kpkt;
+    xlum = random_number (0.0, 1.0) * geo.f_kpkt;
 
     xlumsum = 0;
     icell = 0;
@@ -673,8 +673,8 @@ photo_gen_matom (p, weight, photstart, nphot)
   {
     /* locate the wind_cell in which the photon bundle originates. And also decide which of the macro
        atom levels will be sampled (identify that level as "upper"). */
-    xlum = random_number(0.0,1.0) * geo.f_matom;
-	
+    xlum = random_number (0.0, 1.0) * geo.f_matom;
+
 
     xlumsum = 0;
     icell = 0;

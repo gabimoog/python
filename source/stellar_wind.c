@@ -65,7 +65,7 @@ get_stellar_wind_params (ndom)
     Log ("Setting zdom[ndom].rmin to geo.rstar\n");
     zdom[ndom].rmin = geo.rstar;
   }
-  zdom[ndom].rmax=10*zdom[ndom].rmin;
+  zdom[ndom].rmax = 10 * zdom[ndom].rmin;
   rddoub ("Stellar_wind.radmax(cm)", &zdom[ndom].rmax); /*Radius where wind ends */
   zdom[ndom].cl_rmin = zdom[ndom].rmin;
   rddoub ("Stellar_wind.vbase(cm)", &zdom[ndom].cl_v_zero);     /* Velocity at base of the wind */
@@ -79,7 +79,7 @@ get_stellar_wind_params (ndom)
 
   /* define the the variables that determine the gridding */
   zdom[ndom].wind_rho_min = 0;
-  zdom[ndom].wind_rho_max = zdom[ndom].rho_max=zdom[ndom].rmax;
+  zdom[ndom].wind_rho_max = zdom[ndom].rho_max = zdom[ndom].rmax;
   zdom[ndom].zmax = zdom[ndom].rmax;
 
 

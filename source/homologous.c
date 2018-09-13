@@ -59,12 +59,12 @@ get_homologous_params (ndom)
   Log ("Creating a homolgous wind model in domain %d\n", ndom);
 
 
- /* Initialize some of the relevant parameters */
+  /* Initialize some of the relevant parameters */
 
 
   one_dom->stellar_wind_mdot = 100.;
   one_dom->rmin = geo.rstar;
-  one_dom->rmax =  2.2464e15;
+  one_dom->rmax = 2.2464e15;
   one_dom->cl_v_zero = 200e5;
   one_dom->cl_beta = 7.0;
 
@@ -74,7 +74,7 @@ get_homologous_params (ndom)
 
 
   rddoub ("Homologous.radmin(cm)", &one_dom->rmin);     /*Radius where wind begins */
-  rddoub ("Homologous.radmax(cm)", &one_dom->rmax);     /*Radius where wind ends*/
+  rddoub ("Homologous.radmax(cm)", &one_dom->rmax);     /*Radius where wind ends */
 
   if (one_dom->rmin < geo.rstar)
   {

@@ -302,7 +302,7 @@ spectrum_create (p, f1, f2, nangle, select_extract)
   double nlow, nhigh;
   int k_orig, k1_orig;
   int iwind;                    // Variable defining whether this is a wind photon
-  int max_scat,max_res;
+  int max_scat, max_res;
 
   freqmin = f1;
   freqmax = f2;
@@ -422,7 +422,7 @@ spectrum_create (p, f1, f2, nangle, select_extract)
        * a macro atom it's type is increased by 10.  When we want to construct a spectrum for photons originating
        * from the boundary layer we need to subtract 10 from the type.    See python.h 
        */
-      if (spectype >= 10)      
+      if (spectype >= 10)
         spectype -= 10;
 
       if (spectype == PTYPE_STAR || spectype == PTYPE_BL || spectype == PTYPE_AGN)      // Then it came from the bl or the star
@@ -542,21 +542,21 @@ spectrum_create (p, f1, f2, nangle, select_extract)
 
 
 
-  max_scat=max_res=0;
+  max_scat = max_res = 0;
 
-  for (i=1;i<MAXSCAT;i++)
+  for (i = 1; i < MAXSCAT; i++)
   {
-	  if(nscat[i]>0)
-	  {
-		  max_scat=i;
-	  }
-	  if(nres[i]>max_res)
-	  {
-		  max_res=i;
-	  }
+    if (nscat[i] > 0)
+    {
+      max_scat = i;
+    }
+    if (nres[i] > max_res)
+    {
+      max_res = i;
+    }
   }
 
-  Log ("\nNo. of photons which have scattered n times.     The max number of scatters seen was %d\n",max_scat);
+  Log ("\nNo. of photons which have scattered n times.     The max number of scatters seen was %d\n", max_scat);
   for (i = 0; i <= max_scat; i++)
   {
     Log ("%6d", nscat[i]);
@@ -564,7 +564,7 @@ spectrum_create (p, f1, f2, nangle, select_extract)
       Log ("\n");
   }
 
-  Log ("\nNumber of photons resonantly scattering n times.  The max number of scatters seen was %d\n",max_res);
+  Log ("\nNumber of photons resonantly scattering n times.  The max number of scatters seen was %d\n", max_res);
   for (i = 0; i <= max_res; i++)
   {
     Log ("%6d", nres[i]);
@@ -701,18 +701,22 @@ spectrum_summary (filename, nspecmin, nspecmax, select_spectype, renorm, loglin,
   get_time (string);
   fprintf (fptr, "# Date	%s\n#  \n", string);
 
-  if (select_spectype==SPECTYPE_RAW) {
-      fprintf (fptr, "\n# Units: L_nu spectrum (erg/s/Hz)\n\n");
+  if (select_spectype == SPECTYPE_RAW)
+  {
+    fprintf (fptr, "\n# Units: L_nu spectrum (erg/s/Hz)\n\n");
   }
-  else if (select_spectype==SPECTYPE_FLAMBDA) {
-      fprintf (fptr, "\n# Units: flambda spectrum (erg/s/cm^-2/A) at %.1f parsecs\n\n", D_SOURCE);
+  else if (select_spectype == SPECTYPE_FLAMBDA)
+  {
+    fprintf (fptr, "\n# Units: flambda spectrum (erg/s/cm^-2/A) at %.1f parsecs\n\n", D_SOURCE);
   }
-  else if (select_spectype==SPECTYPE_FNU) {
-      fprintf (fptr, "\n# Units: Lnu spectrum (erg/s/Hz) at %.1f parsecs\n\n", D_SOURCE);
+  else if (select_spectype == SPECTYPE_FNU)
+  {
+    fprintf (fptr, "\n# Units: Lnu spectrum (erg/s/Hz) at %.1f parsecs\n\n", D_SOURCE);
   }
-  else {
-      Error("spectrum_summary: Unknown select_spectype %d\n",select_spectype);
-      exit(0);
+  else
+  {
+    Error ("spectrum_summary: Unknown select_spectype %d\n", select_spectype);
+    exit (0);
   }
 
 
