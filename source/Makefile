@@ -264,8 +264,12 @@ windsave2table: $(table_objects)
 	cp $@ $(BIN)
 	mv $@ $(BIN)/windsave2table$(VERSION)
 
+run_indent:
+	run_indent.py -all
+
+
 # The next line runs recompiles all of the routines after first cleaning the directory
-all: clean windsave2table python py_wind
+all: clean run_indent windsave2table python py_wind
 
 
 FILE = get_atomicdata.o atomic.o
