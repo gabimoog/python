@@ -49,7 +49,7 @@ def get_gnu():
     gnu=False
     indent=''
 
-    proc = subprocess.Popen('indent -version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.Popen('indent --version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout,stderr=proc.communicate()
     stdout = stdout.decode().split('\n')
     if stdout[0].count('GNU'):
@@ -57,12 +57,12 @@ def get_gnu():
         indent='indent'
 
 
-    proc = subprocess.Popen('gnuindent -version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.Popen('gnu-indent --version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout,stderr=proc.communicate()
     stdout = stdout.decode().split('\n')
     if stdout[0].count('GNU'):
         gnu=True
-        indent='gnuindent'
+        indent='gnu-indent'
 
     if gnu==False:
         print('Error: could not find a gnu version of indent')
