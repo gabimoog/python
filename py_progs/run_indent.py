@@ -49,6 +49,14 @@ def get_gnu():
     gnu=False
     indent=''
 
+    proc = subprocess.Popen('gindent --version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout,stderr=proc.communicate()
+    stdout = stdout.decode().split('\n')
+    if stdout[0].count('GNU'):
+        gnu=True
+        indent='gindent'
+
+
     proc = subprocess.Popen('indent --version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout,stderr=proc.communicate()
     stdout = stdout.decode().split('\n')
@@ -56,16 +64,9 @@ def get_gnu():
         gnu=True
         indent='indent'
 
-
-    proc = subprocess.Popen('gnu-indent --version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout,stderr=proc.communicate()
-    stdout = stdout.decode().split('\n')
-    if stdout[0].count('GNU'):
-        gnu=True
-        indent='gnu-indent'
-
     if gnu==False:
-        print('Error: could not find a gnu version of indent')
+        print('Error: could not find a gnu version of indent.')
+        print('If using a Mac, one can use "brew install gnu-indent" to install gindent')
         indent =''
 
     return indent
@@ -108,6 +109,7 @@ def doit(filename='lines.c'):
 
 
 
+    print(indent_command)
     proc = subprocess.Popen(indent_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout,stderr=proc.communicate()
     stdout = stdout.decode().split('\n')

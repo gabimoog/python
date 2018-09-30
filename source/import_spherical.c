@@ -26,8 +26,8 @@
 
 
 
-# define LINELEN 512
-# define NCELLS  512
+#define LINELEN 512
+#define NCELLS  512
 
 /* The next variables have to be external because we need them to be available later on */
 

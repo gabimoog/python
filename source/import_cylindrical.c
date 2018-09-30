@@ -19,8 +19,8 @@
 
 
 
-# define LINELEN 512
-# define NCELLS  512
+#define LINELEN 512
+#define NCELLS  512
 
 /** The structure that holds the inputs and any subsidiary variables
  *

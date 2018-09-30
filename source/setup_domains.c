@@ -98,7 +98,6 @@ get_domain_params (ndom)
     import_wind (ndom);
   }
   else
-
   {
     rdint ("Wind.dim.in.x_or_r.direction", &zdom[ndom].ndim);
     if (zdom[ndom].coord_type)

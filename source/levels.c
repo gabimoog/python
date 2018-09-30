@@ -110,7 +110,7 @@ levels (xplasma, mode)
   double kt;
   double z;
 
-  if (mode == NEBULARMODE_TR)   // LTE with t_r
+  if (mode == NEBULARMODE_TR)   // LTE with t_r 
   {
     t = xplasma->t_r;
     weight = 1;

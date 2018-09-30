@@ -29,8 +29,8 @@
 
 
 
-# define LINELEN 512
-# define NCELLS  512
+#define LINELEN 512
+#define NCELLS  512
 
 /* Read in a model of in various coordiante systems, using the coord_type
  * to specify the type of model */
