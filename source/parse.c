@@ -191,6 +191,10 @@ parse_command_line (argc, argv)
         j = i;
       }
 
+      else if (strcmp (argv[i], "-q") == 0)
+      {
+          modes.test=1;
+      }
       else if (strcmp (argv[i], "--version") == 0)
       {
         /* give information about the pyhon version, such as commit hash */
