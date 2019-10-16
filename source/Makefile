@@ -100,7 +100,7 @@ LDFLAGS+= -L$(LIB) -lm -lgsl -lgslcblas
 
 #Note that version should be a single string without spaces.
 
-VERSION = 83test
+VERSION = 83d
 
 startup:
 	@echo $(COMPILER_PRINT_STRING)			# prints out compiler information
