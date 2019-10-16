@@ -193,7 +193,7 @@ parse_command_line (argc, argv)
 
       else if (strcmp (argv[i], "-q") == 0)
       {
-          modes.test=1;
+        modes.test = 1;
       }
       else if (strcmp (argv[i], "--version") == 0)
       {

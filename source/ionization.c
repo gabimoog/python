@@ -394,11 +394,12 @@ one_shot (xplasma, mode)
     xxxplasma = xplasma;
     zero_emit (te_old);         //But we do still want to compute all heating and cooling rates
   }
-  else if (geo.wcycle==0 && modes.test==1) {
-    Log("gotcha %f\n", xplasma->t_r);
-    te_new = calc_te (xplasma, 0.7 * xplasma->t_r, 1.3 * xplasma->t_r);     //compute the new t_e - no limits on where it can go
-    xplasma->t_e = te_new; /*Allow the temperature to move by a fraction gain towards
-                                                           the equilibrium temperature */
+  else if (geo.wcycle == 0 && modes.test == 1)
+  {
+    Log ("gotcha %f\n", xplasma->t_r);
+    te_new = calc_te (xplasma, 0.7 * xplasma->t_r, 1.3 * xplasma->t_r); //compute the new t_e - no limits on where it can go
+    xplasma->t_e = te_new;      /*Allow the temperature to move by a fraction gain towards
+                                   the equilibrium temperature */
 
     /* NSH 130722 - NOTE - at this stage, the cooling terms are still those computed from
      * the 'ideal' t_e, not the new t_e - this may be worth investigatiing. */
