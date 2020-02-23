@@ -84,7 +84,7 @@ do_windsave2table (root, ion_switch)
     }
     else
     {
-      for (i = 0; i < 7; i++)
+      for (i = 0; i < 10; i++)
       {
         create_ion_table (ndom, rootname, 1, all[i]);
         create_ion_table (ndom, rootname, 2, all[i]);
