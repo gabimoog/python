@@ -123,17 +123,17 @@ matrix_ion_populations (xplasma, mode)
     xion[mm] = mm;              // xion is an array we use to track which ion is in which row of the matrix
     if (mm != ele[ion[mm].nelem].firstion)      // We can recombine since we are not in the first ionization stage
     {
-      rr_rates[mm] = total_rrate (mm, xplasma->t_e);    // radiative recombination rates          
+      rr_rates[mm] = xplasma->rr_rate[mm] = total_rrate (mm, xplasma->t_e);     // radiative recombination rates          
     }
     if (ion[mm].istate != ele[ion[mm].nelem].istate_max)        // we can photoionize, since we are not in the highest ionization state
     {
       if (mode == NEBULARMODE_MATRIX_BB)
       {
-        pi_rates[mm] = calc_pi_rate (mm, xplasma, 2, 1);        // PI rate for the BB model
+        pi_rates[mm] = xplasma->pi_rate[mm] = calc_pi_rate (mm, xplasma, 2, 1); // PI rate for the BB model
       }
       else if (mode == NEBULARMODE_MATRIX_SPECTRALMODEL)
       {
-        pi_rates[mm] = calc_pi_rate (mm, xplasma, 1, 1);        // PI rate for an explicit spectral model
+        pi_rates[mm] = xplasma->pi_rate[mm] = calc_pi_rate (mm, xplasma, 1, 1); // PI rate for an explicit spectral model
       }
       else
       {
@@ -164,11 +164,11 @@ matrix_ion_populations (xplasma, mode)
     {
       if (mode == NEBULARMODE_MATRIX_BB)
       {
-        inner_rates[mm] = calc_pi_rate (mm, xplasma, 2, 2);
+        inner_rates[mm] = xplasma->inner_rate[mm] = calc_pi_rate (mm, xplasma, 2, 2);
       }
       else if (mode == NEBULARMODE_MATRIX_SPECTRALMODEL)
       {
-        inner_rates[mm] = calc_pi_rate (mm, xplasma, 1, 2);
+        inner_rates[mm] = xplasma->inner_rate[mm] = calc_pi_rate (mm, xplasma, 1, 2);
       }
     }
   }

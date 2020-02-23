@@ -963,6 +963,12 @@ typedef struct plasma
   double exp_w[NXBANDS];        /* The prefactor of an exponential representation of the radiation field in a cell */
   double ip;                    /* Ionization parameter calculated as number of photons over the lyman limit entering a cell, divided by the number density of hydrogen for the cell */
   double xi;                    /* Ionization parameter as defined by Tartar et al 1969 and described in Hazy. Its the ionizing flux over the number of hydrogen atoms */
+
+  /* rates used in matrix ionization calculations */
+
+  double *rr_rate, *pi_rate, *inner_rate;   /* radiative rate, photoinzation rate, auger_ionization */
+
+
 } plasma_dummy, *PlasmaPtr;
 
 PlasmaPtr plasmamain;

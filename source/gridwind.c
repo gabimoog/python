@@ -597,6 +597,22 @@ calloc_dyn_plasma (nelem)
       Error ("calloc_dyn_plasma: Error in allocating memory for recomb\n");
       Exit (0);
     }
+    if ((plasmamain[n].rr_rate = calloc (sizeof (double), nions)) == NULL)
+    {
+      Error ("calloc_dyn_plasma: Error in allocating memory for rr_rate\n");
+      Exit (0);
+    }
+    if ((plasmamain[n].pi_rate = calloc (sizeof (double), nions)) == NULL)
+    {
+      Error ("calloc_dyn_plasma: Error in allocating memory for pi_rate\n");
+      Exit (0);
+    }
+    if ((plasmamain[n].inner_rate = calloc (sizeof (double), nions)) == NULL)
+    {
+      Error ("calloc_dyn_plasma: Error in allocating memory for inner_rate\n");
+      Exit (0);
+    }
+
     if ((plasmamain[n].scatters = calloc (sizeof (int), nions)) == NULL)
     {
       Error ("calloc_dyn_plasma: Error in allocating memory for scatters\n");
