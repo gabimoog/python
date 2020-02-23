@@ -52,7 +52,7 @@ do_windsave2table (root, ion_switch)
 {
   int ndom, i;
   char rootname[LINELENGTH];
-  int all[7] = { 0, 4, 5, 6, 7, 8, 9 };
+  int all[10] = { 0, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
 
   for (ndom = 0; ndom < geo.ndomain; ndom++)
@@ -1058,6 +1058,21 @@ get_ion (ndom, element, istate, iswitch, name)
       {
         x[n] = plasmamain[nplasma].cool_dr_ion[nion];
         strcpy (name, "cool_dr");
+      }
+      else if (iswitch == 10)
+      {
+        x[n] = plasmamain[nplasma].rr_rate[nion];
+        strcpy (name, "rr_rate");
+      }
+      else if (iswitch == 11)
+      {
+        x[n] = plasmamain[nplasma].pi_rate[nion];
+        strcpy (name, "pi_rate");
+      }
+      else if (iswitch == 12)
+      {
+        x[n] = plasmamain[nplasma].inner_rate[nion];
+        strcpy (name, "inner_rate");
       }
       else
       {
